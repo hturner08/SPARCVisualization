@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/examples">
+        <file>190616-results-meshtal.xlsx</file>
+        <file>assets/example1.csv</file>
+    </qresource>
+</RCC>
