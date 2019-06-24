@@ -41,6 +41,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QVBoxLayout *vLayout = new QVBoxLayout();
     hLayout->addWidget(container, 1);
     hLayout->addLayout(vLayout);
+    widget->setLayout(hLayout);
+    this->setCentralWidget(widget);
 
     widget->setWindowTitle(QStringLiteral("A Cosine Wave"));
 
