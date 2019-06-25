@@ -25,6 +25,7 @@ public:
     void setSmoothDots(int smooth);
     void toggleItemCount();
     void start();
+    void colorData();
 
 public Q_SLOTS:
     void changeStyle(int style);

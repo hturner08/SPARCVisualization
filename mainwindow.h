@@ -17,6 +17,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     QtDataVisualization::Q3DScatter *view;
+    void color_graph();
 
 private slots:
     void on_pushButton_clicked();

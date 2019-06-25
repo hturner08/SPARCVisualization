@@ -170,9 +170,23 @@ void MainWindow::graph(){
     view->setFlags(view->flags() ^ Qt::FramelessWindowHint);
     QtDataVisualization::QScatter3DSeries *series = new  QtDataVisualization::QScatter3DSeries;
     QtDataVisualization::QScatterDataArray data;
+    QList<float> heat_values;
+    float max, min;
+    max = 0.0f;
+    min = 0.0f;
+    QVector3D vectormax, vectormin;
     for(int i = 1; i < scatterdata.size();++i){
         QStringList splitline = scatterdata[i].split(",");
         data << QVector3D(splitline[1].toFloat(),splitline[2].toFloat(),splitline[3].toFloat());
+        heat_values << splitline[4].toFloat();
+        if (splitline[4].toFloat() > max || max==0.0f ){
+            max = splitline[4].toFloat();
+            vectormax = QVector3D(splitline[1].toFloat(),splitline[2].toFloat(),splitline[3].toFloat());
+        }
+        else if(splitline[4].toFloat() < min || min == 0.0f){
+            min = splitline[4].toFloat();
+            vectormin = QVector3D(splitline[1].toFloat(),splitline[2].toFloat(),splitline[3].toFloat());
+        }
         qDebug() << splitline[1] << splitline[2] << splitline[3];
     }
     series->dataProxy()->addItems(data);
@@ -180,6 +194,9 @@ void MainWindow::graph(){
     series->setItemLabelFormat(QStringLiteral("@xTitle: @xLabel @yTitle: @yLabel @zTitle: @zLabel"));
     series->setMeshSmooth(1);
     view->show();
+}
+void MainWindow::color_graph(){
+
 }
 
 void MainWindow::on_actionOpen_triggered(){

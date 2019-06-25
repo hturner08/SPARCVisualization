@@ -33,6 +33,9 @@ GraphDataModifier::GraphDataModifier(Q3DScatter *scatter)
     m_graph->activeTheme()->setFont(font);
     m_graph->setShadowQuality(QAbstract3DGraph::ShadowQualitySoftLow);
     m_graph->scene()->activeCamera()->setCameraPreset(Q3DCamera::CameraPresetFront);
+    m_graph->axisX()->setTitle("X");
+    m_graph->axisY()->setTitle("Y");
+    m_graph->axisZ()->setTitle("Z");
 //    m_graph->addSeries(series);
 
 //    addData();
@@ -43,12 +46,13 @@ GraphDataModifier::~GraphDataModifier()
     delete m_graph;
 }
 
+void GraphDataModifier::colorData(){
+
+}
+
 void GraphDataModifier::addData()
 {
     // Configure the axes according to the data
-    m_graph->axisX()->setTitle("X");
-    m_graph->axisY()->setTitle("Y");
-    m_graph->axisZ()->setTitle("Z");
 
     QScatterDataArray *dataArray = new QScatterDataArray;
     dataArray->resize(m_itemCount);
@@ -146,15 +150,16 @@ void GraphDataModifier::setGridEnabled(int enabled)
 
 void GraphDataModifier::toggleItemCount()
 {
-    if (m_itemCount == numberOfItems) {
-        m_itemCount = lowerNumberOfItems;
-        m_curveDivider = lowerCurveDivider;
-    } else {
-        m_itemCount = numberOfItems;
-        m_curveDivider = curveDivider;
-    }
-    m_graph->seriesList().at(0)->dataProxy()->resetArray(0);
-    addData();
+//    if (m_itemCount == numberOfItems) {
+//        m_itemCount = lowerNumberOfItems;
+//        m_curveDivider = lowerCurveDivider;
+//    } else {
+//        m_itemCount = numberOfItems;
+//        m_curveDivider = curveDivider;
+//    }
+//    m_graph->seriesList().at(0)->dataProxy()->resetArray(0);
+//    addData();
+    qDebug() << "Work in Progress";
 }
 
 QVector3D GraphDataModifier::randVector()
