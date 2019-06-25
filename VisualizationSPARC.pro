@@ -29,13 +29,15 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
         meshtalparser.cpp \
-        properties.cpp
+        properties.cpp \
+        randomfunctions.cpp
 
 HEADERS += \
         graphdatamodifier.h \
         mainwindow.h \
         meshtalparser.h \
-        properties.h
+        properties.h \
+        randomfunctions.h
 
 FORMS += \
         mainwindow.ui \

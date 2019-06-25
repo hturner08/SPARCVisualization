@@ -3,6 +3,7 @@
 #include "properties.h"
 #include "graphdatamodifier.h"
 #include "meshtalparser.h"
+#include "randomfunctions.h"
 #include <QDebug>
 #include <QAction>
 #include <QMessageBox>
@@ -22,6 +23,7 @@
 #include <QtGui/QScreen>
 #include <QtGui/QFontDatabase>
 #include <QApplication>
+#include <QScatterDataProxy>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -168,31 +170,19 @@ void MainWindow::graph(){
     QStringList scatterdata;
     scatterdata = MeshtalParser::parse_file(property->fileName);
     view->setFlags(view->flags() ^ Qt::FramelessWindowHint);
-    QtDataVisualization::QScatter3DSeries *series = new  QtDataVisualization::QScatter3DSeries;
-    QtDataVisualization::QScatterDataArray data;
     QList<float> heat_values;
-    float max, min;
-    max = 0.0f;
-    min = 0.0f;
-    QVector3D vectormax, vectormin;
     for(int i = 1; i < scatterdata.size();++i){
+        QtDataVisualization::QScatterDataArray data;
         QStringList splitline = scatterdata[i].split(",");
         data << QVector3D(splitline[1].toFloat(),splitline[2].toFloat(),splitline[3].toFloat());
-        heat_values << splitline[4].toFloat();
-        if (splitline[4].toFloat() > max || max==0.0f ){
-            max = splitline[4].toFloat();
-            vectormax = QVector3D(splitline[1].toFloat(),splitline[2].toFloat(),splitline[3].toFloat());
-        }
-        else if(splitline[4].toFloat() < min || min == 0.0f){
-            min = splitline[4].toFloat();
-            vectormin = QVector3D(splitline[1].toFloat(),splitline[2].toFloat(),splitline[3].toFloat());
-        }
+        QtDataVisualization::QScatter3DSeries *series = new  QtDataVisualization::QScatter3DSeries;
+        series->dataProxy()->addItems(data);
+        series->setBaseColor(randomfunctions::calculate_color(splitline[8].toFloat()));
+        view->addSeries(series);
+        series->setItemLabelFormat(QStringLiteral("@xTitle: @xLabel @yTitle: @yLabel @zTitle: @zLabel"));
+        series->setMeshSmooth(1);
         qDebug() << splitline[1] << splitline[2] << splitline[3];
     }
-    series->dataProxy()->addItems(data);
-    view->addSeries(series);
-    series->setItemLabelFormat(QStringLiteral("@xTitle: @xLabel @yTitle: @yLabel @zTitle: @zLabel"));
-    series->setMeshSmooth(1);
     view->show();
 }
 void MainWindow::color_graph(){
