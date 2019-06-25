@@ -14,7 +14,7 @@ QColor randomfunctions::calculate_color(float value){
     int min;
     int max;
     min = 0;
-    max = 3;
+    max = 1;
     int r,g;
     r = (value-min)/(max-min)*127 + 128;
     g = 255 - (value-min)/(max-min)*255;

@@ -179,7 +179,7 @@ void MainWindow::graph(){
         series->dataProxy()->addItems(data);
         series->setBaseColor(randomfunctions::calculate_color(splitline[8].toFloat()));
         view->addSeries(series);
-        series->setItemLabelFormat(QStringLiteral("@xTitle: @xLabel @yTitle: @yLabel @zTitle: @zLabel"));
+        series->setItemLabelFormat(QStringLiteral("@xTitle: @xLabel @yTitle: @yLabel @zTitle: @zLabel HeatDeposition:")+ splitline[8]);
         series->setMeshSmooth(1);
         qDebug() << splitline[1] << splitline[2] << splitline[3];
     }
