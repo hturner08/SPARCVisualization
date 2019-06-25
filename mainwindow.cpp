@@ -184,6 +184,7 @@ void MainWindow::graph(){
         qDebug() << splitline[1] << splitline[2] << splitline[3];
     }
     view->show();
+    this->property->~Properties();
 }
 void MainWindow::color_graph(){
 
