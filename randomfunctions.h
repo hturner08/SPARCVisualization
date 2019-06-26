@@ -1,12 +1,12 @@
 #ifndef RANDOMFUNCTIONS_H
 #define RANDOMFUNCTIONS_H
 #include <QColor>
+#include <map>
 
 class randomfunctions
 {
 public:
-    randomfunctions();
     static QColor calculate_color(float);
+    static std::map<int,int[]> *colors;
 };
-
 #endif // RANDOMFUNCTIONS_H

@@ -79,6 +79,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QPushButton *itemCountButton = new QPushButton(widget);
     itemCountButton->setText(QStringLiteral("Toggle item count"));
 
+    QPushButton *scaleButton = new QPushButton(widget);
+    scaleButton->setText(QStringLiteral("Change Scale"));
+
     QCheckBox *backgroundCheckBox = new QCheckBox(widget);
     backgroundCheckBox->setText(QStringLiteral("Show background"));
     backgroundCheckBox->setChecked(true);
@@ -114,6 +117,7 @@ MainWindow::MainWindow(QWidget *parent) :
     vLayout->addWidget(shadowQuality);
     vLayout->addWidget(new QLabel(QStringLiteral("Change font")));
     vLayout->addWidget(fontList, 1, Qt::AlignTop);
+    vLayout->addWidget(scaleButton, 0, Qt::AlignTop);
 
     GraphDataModifier *modifier = new GraphDataModifier(view);
 
@@ -154,6 +158,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QObject::connect(modifier, &GraphDataModifier::fontChanged, fontList,
                      &QFontComboBox::setCurrentFont);
+//    QObject::connect(scaleButton, &Q)
 }
 
 MainWindow::~MainWindow()
@@ -179,7 +184,7 @@ void MainWindow::graph(){
         series->dataProxy()->addItems(data);
         series->setBaseColor(randomfunctions::calculate_color(splitline[8].toFloat()));
         view->addSeries(series);
-        series->setItemLabelFormat(QStringLiteral("@xTitle: @xLabel @yTitle: @yLabel @zTitle: @zLabel HeatDeposition:")+ splitline[8]);
+        series->setItemLabelFormat(QStringLiteral("@xTitle: @xLabel @yTitle: @yLabel @zTitle: @zLabel HRate:")+ splitline[8]);
         series->setMeshSmooth(1);
         qDebug() << splitline[1] << splitline[2] << splitline[3];
     }
