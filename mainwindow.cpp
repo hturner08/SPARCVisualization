@@ -175,6 +175,9 @@ void MainWindow::graph(){
     QStringList scatterdata;
     scatterdata = MeshtalParser::parse_file(property->fileName);
     view->setFlags(view->flags() ^ Qt::FramelessWindowHint);
+    while(view->seriesList().size() > 0){
+        view->removeSeries(view->seriesList()[0]);
+    }
     QList<float> heat_values;
     for(int i = 1; i < scatterdata.size();++i){
         QtDataVisualization::QScatterDataArray data;

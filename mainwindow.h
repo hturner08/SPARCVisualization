@@ -23,6 +23,7 @@ private slots:
     void on_pushButton_clicked();
     void on_actionTFCoil_triggered();
     void on_actionOpen_triggered();
+//    void on_action2D_triggered();
     void graph();
 
 private:
