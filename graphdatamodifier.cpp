@@ -84,15 +84,18 @@ void GraphDataModifier::changeStyle(int style)
     if (comboBox) {
         m_style = QAbstract3DSeries::Mesh(comboBox->itemData(style).toInt());
         if (m_graph->seriesList().size())
-            m_graph->seriesList().at(0)->setMesh(m_style);
+            for(QScatter3DSeries *series : m_graph->seriesList()){
+                series->setMesh(m_style);
+            }
     }
 }
 
 void GraphDataModifier::setSmoothDots(int smooth)
 {
     m_smooth = bool(smooth);
-    QScatter3DSeries *series = m_graph->seriesList().at(0);
-    series->setMeshSmooth(m_smooth);
+    for(QScatter3DSeries *series : m_graph->seriesList()){
+        series->setMeshSmooth(m_smooth);
+    }
 }
 
 void GraphDataModifier::changeTheme(int theme)

@@ -1,25 +1,80 @@
 #include "randomfunctions.h"
 #include <bits/stdc++.h>
 #include <map>
-//Green
-//R:128
-//G:255
-//B:0
-//Red
-//R:255
-//G:0
-//B:0
-
+#include <QDebug>
+/*Scale 1:
+ * 7E00FF
+ * 4E00FF
+ * 1C00FF
+ * 0029D5
+ * 008974
+ * 00EB12
+ * 4EFF00
+ * B0FF00
+ * FFF500
+ * FFC500
+ * */
 QColor randomfunctions::calculate_color(float value){
-    int niceValue = int(log10(value));
-    int min;
-    int max;
-    min = 0;
-    max = 1;
-    int r,g;
-    r = (value-min)/(max-min)*127 + 128;
-    g = 255 - (value-min)/(max-min)*255;
-    return QColor(r,g,0,0);
+    std::map<float,int*> colorMap;
+    int blue[] = {0,0,255};
+    int two[] = {0,20,235};
+    int three[] = {0,40,215};
+    int four[] = {0,60,205};
+    int five[] = {0,80,185};
+    int six[] = {0,105,165};
+    int seven[] = {0,130,145};
+    int eight[] = {0,155,125};
+    int nine[] = {0,180,105};
+    int ten[] = {0,205,85};
+    int eleven[] = {0,230,65};
+    int yellow[] = {255,255,0};
+    int thirteen[] = {255,240,0};
+    int fourteen[] = {255,210,0};
+    int fifteen[] = {255,180,0};
+    int sixteen[] = {255,150,0};
+    int seventeen[] = {255,120,0};
+    int eighteen[] = {255,90,0};
+    int nineteen[] ={255,60,0};
+    colorMap[0.05] = blue;
+    colorMap[0.1] = two;
+    colorMap[0.2] = three;
+    colorMap[0.3] = four;
+    colorMap[0.5] = five;
+    colorMap[0.7] = six;
+    colorMap[1] = seven;
+    colorMap[1.5] = eight;
+    colorMap[2] = nine;
+    colorMap[3] =ten;
+    colorMap[5] =eleven;
+    colorMap[7] = yellow;
+    colorMap[10] = thirteen;
+    colorMap[15] = fourteen;
+    colorMap[20] =fifteen;
+    colorMap[30] = sixteen;
+    colorMap[50] = seventeen;
+    colorMap[70] = eighteen;
+    colorMap[100] =nineteen;
+    std::map<float,int*>::iterator check = colorMap.begin();
+    int color[3] = {0, 0, 0};
+    int *current = color;
+    while(check != colorMap.end()){
+        qDebug()<<check->first;
+        if(value < (check->first)/500){
+            qDebug()<<"Color found!";
+            return QColor(current[0],current[1],current[2],0);
+        }
+        current = check->second;
+        check++;
+    }
+//    int min;
+//    int max;
+//    min = 0;
+//    max = 1;
+//    int r,g;
+//    r = (value-min)/(max-min)*127 + 128;
+//    g = 255 - (value-min)/(max-min)*255;
+    qDebug("Error");
+    return QColor(10,10,10,0);
 }
 /*
 LVL2

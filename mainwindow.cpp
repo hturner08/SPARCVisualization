@@ -182,9 +182,10 @@ void MainWindow::graph(){
         data << QVector3D(splitline[1].toFloat(),splitline[2].toFloat(),splitline[3].toFloat());
         QtDataVisualization::QScatter3DSeries *series = new  QtDataVisualization::QScatter3DSeries;
         series->dataProxy()->addItems(data);
-        series->setBaseColor(randomfunctions::calculate_color(splitline[8].toFloat()));
+        series->setBaseColor(randomfunctions::calculate_color(splitline[4].toFloat()));
         view->addSeries(series);
-        series->setItemLabelFormat(QStringLiteral("@xTitle: @xLabel @yTitle: @yLabel @zTitle: @zLabel HRate:")+ splitline[8]);
+        QString additional = splitline[4] + " " + "Region:" + splitline[0];
+        series->setItemLabelFormat(QStringLiteral("@xTitle: @xLabel @yTitle: @yLabel @zTitle: @zLabel HRate:")+ additional);
         series->setMeshSmooth(1);
         qDebug() << splitline[1] << splitline[2] << splitline[3];
     }
@@ -197,7 +198,7 @@ void MainWindow::color_graph(){
 
 void MainWindow::on_actionOpen_triggered(){
     QString fileName = QFileDialog::getOpenFileName(this,
-    tr("Open File"), "/", tr("Meshtal Files (*.csv *.meshtal)"));
+    tr("Open File"), "", tr("Meshtal Files (*.csv *.meshtal *.xlsx)"));
     qDebug() << "That worked";
     qDebug()<< fileName;
     property = new Properties(this,fileName);
